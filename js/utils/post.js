@@ -30,6 +30,13 @@ export function createPostElement(post) {
       thumbnailElement.src = 'https://via.placeholder.com/318x200?text=thumbail';
     });
     // attach events
+    // goto detail-post when click on dic.post-item
+    const divElement = liElement.firstElementChild;
+    if (divElement) {
+      divElement.addEventListener('click', () => {
+        window.location.assign(`/post-detail.html?id=${post.id}`);
+      });
+    }
 
     return liElement;
   } catch (error) {
