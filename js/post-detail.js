@@ -1,21 +1,6 @@
 import dayjs from 'dayjs';
 import postApi from './api/postApi';
-import { setTextContent } from './utils';
-
-// id="goToEditPageLink"
-// id="postHeroImage"
-// id="postDetailTitle"
-// id="postDetailAuthor"
-// id="postDetailTimeSpan"
-// id="postDetailDescription"
-
-// author: "Kenya Gusikowski"
-// createdAt: 1633700485639
-// description: "aut consequatur qui voluptatibus eos sed aspernatur expedita assumenda debitis perspiciatis at vel et rerum totam exercitationem deleniti molestiae similique perspiciatis ut qui fuga voluptatibus temporibus et magnam asperiores quia quibusdam provident vitae voluptate libero rem repudiandae corrupti ut cupiditate ea aut facere assumenda assumenda magni numquam eveniet cumque unde"
-// id: "sktwi1cgkkuif36du"
-// imageUrl: "https://picsum.photos/id/274/1368/400"
-// title: "Voluptate mollitia"
-// updatedAt: 1633700485639
+import { registerLightBox, setTextContent } from './utils';
 
 function renderPostDetail(post) {
   if (!post) return;
@@ -51,6 +36,12 @@ function renderPostDetail(post) {
 }
 
 (async () => {
+  registerLightBox({
+    modalId: 'lightbox',
+    imgSelector: 'img[data-id="lightboxImg"]',
+    prevSelector: 'button[data-id="lightboxPrev"]',
+    nextSelector: 'button[data-id="lightboxNext"]',
+  });
   // get post id from url
   // fetch post detail Api
   // render post detail

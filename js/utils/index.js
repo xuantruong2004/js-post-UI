@@ -3,3 +3,4 @@ export * from './selector';
 export * from './pagination';
 export * from './search';
 export * from './post';
+export * from './lightbox';
