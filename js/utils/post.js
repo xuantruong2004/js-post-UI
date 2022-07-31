@@ -33,8 +33,17 @@ export function createPostElement(post) {
     // goto detail-post when click on dic.post-item
     const divElement = liElement.firstElementChild;
     if (divElement) {
-      divElement.addEventListener('click', () => {
+      divElement.addEventListener('click', (e) => {
+        const divMenu = liElement.querySelector('[data-id="menu"]');
+        if (divMenu && divMenu.contains(e.target)) return;
         window.location.assign(`/post-detail.html?id=${post.id}`);
+      });
+    }
+
+    const editButton = liElement.querySelector('[data-id="edit"]');
+    if (editButton) {
+      editButton.addEventListener('click', () => {
+        window.location.assign(`/add-edit-post.html?id=${post.id}`);
       });
     }
 
