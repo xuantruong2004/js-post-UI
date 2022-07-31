@@ -90,6 +90,24 @@ function initRandomImage(form) {
     // upload Url
   });
 }
+function initImage(form) {
+  const radioButtons = document.querySelectorAll('[name="image"]');
+  if (!radioButtons) return;
+  for (const radioButton of radioButtons) {
+    radioButton.addEventListener('change', () => {
+      const imageRandom = document.getElementById('img-random');
+      const imageSource = document.getElementById('img-source');
+      if (radioButton.id === 'imageRandom') {
+        imageRandom.classList.remove('d-none');
+        imageSource.classList.add('d-none');
+        initRandomImage(form);
+      } else {
+        imageRandom.classList.add('d-none');
+        imageSource.classList.remove('d-none');
+      }
+    });
+  }
+}
 export function initPostForm({ formId, defaultValue, onSubmit }) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -98,6 +116,8 @@ export function initPostForm({ formId, defaultValue, onSubmit }) {
 
   // init event
   initRandomImage(form);
+  initImage(form);
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formValues = getFormValues(form);

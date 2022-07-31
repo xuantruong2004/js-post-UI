@@ -104,18 +104,44 @@
               </div>
 
               <div class="form-group mb-3">
-                <label for="postChangeImage">Image</label>
-                <small id="passwordHelpBlock" class="form-text text-muted">
-                  We&apos;re using
-                  <a href="https://picsum.photos">Picsum service</a> to get a random image.
-                </small>
-                <input type="text" name="imageUrl" class="d-none" value="" />
-                <div>
-                  <button type="button" id="postChangeImage" class="btn btn-dark">
-                    Change post image
-                  </button>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="image"
+                    id="imageRandom"
+                    checked
+                  />
+                  <label class="form-check-label" for="imageRandom">
+                    Random image using picsum.photos
+                  </label>
                 </div>
-                <div class="invalid-feedback">Please enter author of this post!</div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="image" id="imageSource" />
+                  <label class="form-check-label" for="imageSource">
+                    Upload image from your computer
+                  </label>
+                </div>
+
+                <div id="img-random">
+                  <label for="postChangeImage">Image</label>
+                  <small id="passwordHelpBlock" class="form-text text-muted">
+                    We&apos;re using
+                    <a href="https://picsum.photos">Picsum service</a> to get a random image.
+                  </small>
+                  <input type="text" name="imageUrl" class="d-none" value="" />
+                  <div>
+                    <button type="button" id="postChangeImage" class="btn btn-dark">
+                      Change post image
+                    </button>
+                  </div>
+                  <div class="invalid-feedback"></div>
+                </div>
+
+                <div id="img-source" class="input-group mb-3 d-none">
+                  <input type="file" class="form-control" id="imagesSource" />
+                  <label class="input-group-text" for="imagesSource">Upload</label>
+                </div>
               </div>
 
               <div class="text-center">
