@@ -32,7 +32,7 @@ async function handlePostFormSubmit(formValues) {
       ? await postApi.uploadFormData(formData)
       : await postApi.addFormData(formData);
     toast.success('Save post successfully');
-    // setTimeout(() => window.location.assign(`/post-detail.html?id=${postId.id}`), 1000);
+    setTimeout(() => window.location.assign(`/post-detail.html?id=${postId.id}`), 1000);
   } catch (error) {
     console.log('failed to save post', error);
     toast.error(`Error: ${error}`);
