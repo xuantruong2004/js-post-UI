@@ -1,11 +1,11 @@
 import postApi from './api/postApi';
-import { initPagination, initSearch, renderPostList, renderPagination } from './utils';
+import { initPagination, initSearch, renderPostList, renderPagination, toast } from './utils';
 
 async function handleFilterChange(filterName, FilterValue) {
   try {
     // update query params
     const url = new URL(window.location);
-    url.searchParams.set(filterName, FilterValue);
+    if (filterName) url.searchParams.set(filterName, FilterValue);
     history.pushState({}, '', url);
 
     // reset page
@@ -20,7 +20,23 @@ async function handleFilterChange(filterName, FilterValue) {
     console.log('failed to fetch post to list', error);
   }
 }
-
+function registerPostDeleteEvent() {
+  document.addEventListener('post-delete', async (event) => {
+    try {
+      const post = event.detail;
+      const message = `are you sure to remove post "${post.title}"?`;
+      if (window.confirm(message)) {
+        await postApi.remove(post.id);
+        await handleFilterChange();
+        toast.success('Remove post successfully');
+      }
+    } catch (error) {
+      console.log('failed to remove post', error);
+      toast.error(error.message);
+    }
+    // call API remove
+  });
+}
 (async () => {
   try {
     const url = new URL(window.location);
@@ -31,6 +47,7 @@ async function handleFilterChange(filterName, FilterValue) {
 
     history.pushState({}, '', url);
     const queryParams = url.searchParams;
+    registerPostDeleteEvent();
 
     initPagination({
       elementId: 'pagination',
